@@ -62,6 +62,7 @@ class ViewController: UIViewController {
         present(popOVC, animated: true)
         
         print("popped")
+        print("PopOver width: \(presentedViewController?.preferredContentSize.width), height: \(presentedViewController?.preferredContentSize.height)")
     }
     
     
