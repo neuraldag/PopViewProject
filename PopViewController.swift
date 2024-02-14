@@ -11,27 +11,26 @@ class PopViewController: UIViewController {
     
     var segmentC = UISegmentedControl()
     let array = ["280pt", "150pt"]
-    let closeButton = UIButton()
+    var closeButton = UIBarButtonItem()
 
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = .systemGray5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray5
-        view.frame = .init(x: 0, y: 0, width: 300, height: 280)
         
         segmentC = UISegmentedControl(items: array)
         segmentC.selectedSegmentIndex = 0
-        segmentC.frame = .init(x: 100, y: 30, width: 100, height: 40)
+        segmentC.frame = .init(x: 0, y: 0, width: 100, height: 35)
         segmentC.addTarget(self, action: #selector(sizeChanged(sender:)), for: .valueChanged)
-        view.addSubview(segmentC)
         
-        closeButton.frame = .init(x: 250, y: 30, width: 40, height: 40)
-        closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        closeButton.backgroundColor = .systemGray3
-        closeButton.tintColor = .systemGray5
-        closeButton.layer.cornerRadius = closeButton.frame.size.width / 2
-        closeButton.imageView?.contentMode = .scaleAspectFill
-        view.addSubview(closeButton)
-    }    
+        closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closePressed))
+        navigationItem.rightBarButtonItem = closeButton
+        
+        self.navigationItem.titleView = segmentC
+    }
     
     @objc func sizeChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -41,5 +40,9 @@ class PopViewController: UIViewController {
         }
         
         print("notification sended")
+    }
+    
+    @objc func closePressed() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeView"), object: nil)
     }
 }

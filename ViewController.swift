@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     
     let presentButton = UIButton()
     var size = (width: 300, height: 280)
-    let popOVC = PopViewController()
     
     
     
@@ -25,6 +24,7 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(size150), name: NSNotification.Name(rawValue: "size150pt"), object: popoverPresentationController)
         NotificationCenter.default.addObserver(self, selector: #selector(size280), name: NSNotification.Name(rawValue: "size280pt"), object: popoverPresentationController)
+        NotificationCenter.default.addObserver(self, selector: #selector(closePop), name: NSNotification.Name(rawValue: "closeView"), object: popoverPresentationController)
     }
     
     
@@ -49,9 +49,10 @@ class ViewController: UIViewController {
     
     
     @objc func buttonTapped(sender: UIButton) {
+        let popOVC = UINavigationController(rootViewController: PopViewController())
         popOVC.modalPresentationStyle = .popover
         popOVC.preferredContentSize = .init(width: size.width, height: size.height)
-        popOVC.closeButton.addTarget(self, action: #selector(closePop), for: .touchUpInside)
+//        popOVC.closeButton.addTarget(self, action: #selector(closePop), for: .touchUpInside)
         
         guard let presentationVC = popOVC.popoverPresentationController else { return }
         presentationVC.delegate = self
@@ -70,11 +71,11 @@ class ViewController: UIViewController {
     
     @objc func closePop() { presentedViewController?.dismiss(animated: true) }
     @objc func size150() {
-        presentedViewController?.preferredContentSize = .init(width: 300, height: 150)
+        presentedViewController?.preferredContentSize = .init(width: 300, height: 150-44)
         print("PopOver width: \(presentedViewController?.preferredContentSize.width), height: \(presentedViewController?.preferredContentSize.height)")
     }
     @objc func size280() {
-        presentedViewController?.preferredContentSize = .init(width: 300, height: 280)
+        presentedViewController?.preferredContentSize = .init(width: 300, height: 280-44)
         print("PopOver width: \(presentedViewController?.preferredContentSize.width), height: \(presentedViewController?.preferredContentSize.height)")
     }
 }

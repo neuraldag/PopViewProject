@@ -20,6 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainVC = ViewController()
         let mainNavVC = UINavigationController(rootViewController: mainVC)
         
+        let popVC = PopViewController()
+        let popNavVC = UINavigationController(rootViewController: popVC)
+        popNavVC.loadView()
+        
         self.window = window
         window.rootViewController = mainNavVC
         window.tintColor = .systemOrange
