@@ -52,7 +52,6 @@ class ViewController: UIViewController {
         let popOVC = UINavigationController(rootViewController: PopViewController())
         popOVC.modalPresentationStyle = .popover
         popOVC.preferredContentSize = .init(width: size.width, height: size.height)
-//        popOVC.closeButton.addTarget(self, action: #selector(closePop), for: .touchUpInside)
         
         guard let presentationVC = popOVC.popoverPresentationController else { return }
         presentationVC.delegate = self
