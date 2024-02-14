@@ -9,9 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
     let presentButton = UIButton()
-    var size = (width: 300, height: 280)
     
     
     
@@ -51,7 +49,7 @@ class ViewController: UIViewController {
     @objc func buttonTapped(sender: UIButton) {
         let popOVC = UINavigationController(rootViewController: PopViewController())
         popOVC.modalPresentationStyle = .popover
-        popOVC.preferredContentSize = .init(width: size.width, height: size.height)
+        popOVC.preferredContentSize = .init(width: 300, height: 280-44)
         
         guard let presentationVC = popOVC.popoverPresentationController else { return }
         presentationVC.delegate = self
